@@ -1,9 +1,9 @@
 # RN Native Base Boilerplate
 
 ![RN Native Base Boilerplate License](https://img.shields.io/github/license/ildfreelancer/rn-native-base-boilerplate)
-![RN Native Base Boilerplate Version](https://flat.badgen.net/npm/v/@gocodingnow/rn-better-boilerplate)
+![RN Native Base Boilerplate Version](https://flat.badgen.net/npm/v/@gocodingnow/rn-native-base-boilerplate)
 ![RN Native Base Boilerplate Release Date](https://img.shields.io/github/release-date/ildfreelancer/rn-native-base-boilerplate)
-![RN Native Base Boilerplate Download](https://flat.badgen.net/npm/dt/@gocodingnow/rn-better-boilerplate)
+![RN Native Base Boilerplate Download](https://flat.badgen.net/npm/dt/@gocodingnow/rn-native-base-boilerplate)
 ![RN Native Base Boilerplate Stars](https://img.shields.io/github/stars/ildfreelancer/rn-native-base-boilerplate)
 ![RN Native Base Boilerplate Top Language](https://img.shields.io/github/languages/top/ildfreelancer/rn-native-base-boilerplate)
 ![RN Native Base Boilerplate TypeScript](https://badgen.net/npm/types/tslib)
