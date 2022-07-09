@@ -1,0 +1,570 @@
+{
+  // Place your MClub workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "import": {
+    "prefix": "imp",
+    "body": "import ${2:moduleName} from '${1:module}'$0"
+  },
+  "importNoModuleName": {
+    "prefix": "imn",
+    "body": "import '${1:module}'$0"
+  },
+  "importDestructing": {
+    "prefix": "imd",
+    "body": "import { $2 } from '${1:module}'$0"
+  },
+  "importEverything": {
+    "prefix": "ime",
+    "body": "import * as ${2:alias} from '${1:module}'$0"
+  },
+  "importAs": {
+    "prefix": "ima",
+    "body": "import { ${2:originalName} as ${3:alias} } from '${1:module}'$0"
+  },
+  "exportDestructingDefault": {
+    "prefix": "exdd",
+    "body": "export { default } from '${1:module}'$0"
+  },
+  "exportDefault": {
+    "prefix": "exp",
+    "body": "export default $1$0"
+  },
+  "exportDestructing": {
+    "prefix": "exd",
+    "body": "export { $2 } from '${1:module}'$0"
+  },
+  "exportAs": {
+    "prefix": "exa",
+    "body": "export { ${2:originalName} as ${3:alias} } from '${1:module}'$0"
+  },
+  "exportNamedFunction": {
+    "prefix": "enf",
+    "body": [
+      "export const ${1:functionName} = (${2:params}) => {",
+      "\t$0",
+      "}",
+      ""
+    ],
+    "description": "Export named function in ES7 syntax"
+  },
+  "exportDefaultFunction": {
+    "prefix": "edf",
+    "body": [
+      "export default (${1:params}) => {",
+      "\t$0",
+      "}",
+      ""
+    ],
+    "description": "Export default function in ES7 syntax"
+  },
+  "forOf": {
+    "prefix": "fof",
+    "body": [
+      "for(let ${1:item} of ${2:object}) {",
+      "\t${0}",
+      "}",
+      ""
+    ],
+    "description": "Iterating over property names of iterable objects"
+  },
+  "forIn": {
+    "prefix": "fin",
+    "body": [
+      "for(let ${1:item} in ${2:object}) {",
+      "\t${0}",
+      "}",
+      ""
+    ],
+    "description": "Iterating over property values of iterable objects"
+  },
+  "anonymousFunction": {
+    "prefix": "anfn",
+    "body": [
+      "(${1:params}) => {",
+      "\t${2}",
+      "}",
+      ""
+    ],
+    "description": "Creates an anonymous function in ES7 syntax"
+  },
+  "namedFunction": {
+    "prefix": "nfn",
+    "body": [
+      "const ${1:name} = (${2:params}) => {",
+      "\t${3}",
+      "}",
+      ""
+    ],
+    "description": "Creates a named function in ES7 syntax"
+  },
+  "destructingObject": {
+    "prefix": "dob",
+    "body": "const {${1:propertyName}} = ${2:objectToDestruct}",
+    "description": "Creates and assigns a local variable using object destructing"
+  },
+  "destructingArray": {
+    "prefix": "dar",
+    "body": "const [${1:propertyName}] = ${2:arrayToDestruct}",
+    "description": "Creates and assigns a local variable using array destructing"
+  },
+  "setInterval": {
+    "prefix": "sti",
+    "body": [
+      "setInterval(() => {",
+      "\t${2}",
+      "}, ${0:intervalInms})",
+      ""
+    ],
+    "description": "Executes the given function at specified intervals in ES7 syntax"
+  },
+  "setTimeOut": {
+    "prefix": "sto",
+    "body": [
+      "setTimeout(() => {",
+      "\t${2}",
+      "}, ${1:delayInms})",
+      ""
+    ],
+    "description": "Executes the given function after the specified delay in ES7 syntax"
+  },
+  "consoleError": {
+    "prefix": "cer",
+    "body": "console.error(${1:object})",
+    "description": "Displays a message in the console and also includes a stack trace from where the method was called"
+  },
+  "consoleLog": {
+    "prefix": "clg",
+    "body": "console.log(${1:object})",
+    "description": "Displays a message in the console"
+  },
+  "consoleLogObject": {
+    "prefix": "clgo",
+    "body": "console.log(JSON.stringify(${1:object}, null, 4))",
+    "description": "Displays a message in the console"
+  },
+  "consoleTime": {
+    "prefix": "ctm",
+    "body": "console.time('${1:object}')",
+    "description": "Console time wrapper"
+  },
+  "consoleTimeEnd": {
+    "prefix": "cte",
+    "body": "console.timeEnd('${1:object}')",
+    "description": "Console time end wrapper"
+  },
+  "consoleWarn": {
+    "prefix": "cwa",
+    "body": "console.warn(${1:object})",
+    "description": "Displays a message in the console but also displays a yellow warning icon along with the logged message"
+  },
+  "consoleInfo": {
+    "prefix": "cin",
+    "body": "console.info(${1:object})",
+    "description": "Displays a message in the console but also displays a blue information icon along with the logged message"
+  },
+  "import { memo }": {
+    "prefix": "imrm",
+    "body": [
+      "import { memo } from 'react'",
+      ""
+    ]
+  },
+  "Create style": {
+    "prefix": "rns",
+    "body": [
+      "const styles = ${1:StyleSheet}.create({",
+      "${2}",
+      "})"
+    ]
+  },
+  "Export style": {
+    "prefix": "rnse",
+    "body": [
+      "export const styles = ${1:StyleSheet}.create({",
+      "${2}",
+      "})"
+    ]
+  },
+  "Hook, memo": {
+    "prefix": "rnhm",
+    "body": [
+      "import { memo } from 'react'",
+      "import { View, Text } from 'react-native'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}Component = () => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text></Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}} = memo(${1:${TM_FILENAME_BASE}}Component,${2:isEqual})"
+    ]
+  },
+  "Hook, memo , style ": {
+    "prefix": "rnhms",
+    "body": [
+      "import { memo } from 'react'",
+      "import { View, Text, StyleSheet } from 'react-native'",
+      "",
+      "const styles = StyleSheet.create({",
+      "",
+      "});",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}Component = () => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text></Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}} = memo(${1:${TM_FILENAME_BASE}}Component,${2:isEqual})"
+    ]
+  },
+  "React, Typescript, Hook, memo, interface  ": {
+    "prefix": "rthm",
+    "body": [
+      "import { memo } from 'react'",
+      "import { View, Text } from 'react-native'",
+      "",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
+      "",
+      "}",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}Component = ({}:${1:${TM_FILENAME_BASE}}Props) => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text></Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}} = memo(${1:${TM_FILENAME_BASE}}Component,${2:isEqual})"
+    ]
+  },
+  "React, Typescript, Hook, memo, type, navigation  ": {
+    "prefix": "rtnhm",
+    "body": [
+      "import React, { memo } from 'react'",
+      "import { View, Text } from 'react-native'",
+      "import {  StackScreenProps } from '@react-navigation/stack'",
+      "",
+      "type ${1:${TM_FILENAME_BASE}}Props = StackScreenProps<${3},${4}>",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}Component = ({ navigation, route }:${1:${TM_FILENAME_BASE}}Props) => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text></Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}} = memo(${1:${TM_FILENAME_BASE}}Component,${2:isEqual})"
+    ]
+  },
+  "React,Typescript, Hook, memo, interface, style  ": {
+    "prefix": "rthms",
+    "body": [
+      "import { memo } from 'react'",
+      "import { View, Text, StyleSheet } from 'react-native'",
+      "",
+      "const styles = StyleSheet.create({",
+      "",
+      "});",
+      "",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
+      "",
+      "}",
+      "",
+      "const ${1:${TM_FILENAME_BASE}}Component = ({}:${1:${TM_FILENAME_BASE}}Props) => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text></Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}} = memo(${1:${TM_FILENAME_BASE}}Component,${2:isEqual})"
+    ]
+  },
+  "Redux Constant": {
+    "prefix": "rxconst",
+    "body": [
+      "export const ${1:CONSTANT_NAME} = '${1:CONSTANT_NAME}'"
+    ]
+  },
+  "Redux Action": {
+    "prefix": "rxaction",
+    "body": [
+      "export const ${1:actionName} = (payload) => ({",
+      " type: ${2:type},",
+      " payload",
+      "})"
+    ]
+  },
+  "Typescript interface": {
+    "prefix": "rni",
+    "body": [
+      "interface ${1:${TM_FILENAME_BASE}} {",
+      "",
+      "}"
+    ]
+  },
+  "export Typescript interface": {
+    "prefix": "exi",
+    "body": [
+      "export interface ${1:${TM_FILENAME_BASE}} {",
+      "",
+      "}"
+    ]
+  },
+  "useImperativeHandle": {
+    "prefix": "useImperativeHandle",
+    "body": [
+      "useImperativeHandle(",
+      "\tref,",
+      "\t() => {",
+      "\t\t${2:handler}",
+      "\t},",
+      "\t[${1:deps}],",
+      ")"
+    ]
+  },
+  "React hook state": {
+    "prefix": "us",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialState})"
+    ]
+  },
+  "Typescript React hook state": {
+    "prefix": "tus",
+    "body": [
+      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState<${2:any}>(${3:initialState})"
+    ]
+  },
+  "useEffect": {
+    "prefix": "uef",
+    "body": [
+      "useEffect(() => {",
+      "\t${2:effect}",
+      "\treturn () => {",
+      "\t\t${3:cleanup}",
+      "\t}",
+      "}, [${1:deps}])"
+    ]
+  },
+  "useContext": {
+    "prefix": "uc",
+    "body": [
+      "const ${1:context} = useContext(${2:contextValue})"
+    ]
+  },
+  "useReducer": {
+    "prefix": "ur",
+    "body": [
+      "const [state, dispatch] = useReducer(${1:reducer}, ${2:initialState}, ${3:init})"
+    ]
+  },
+  "useCallback": {
+    "prefix": "ucbh",
+    "body": [
+      "const ${1:callback} = useCallback(() => {",
+      "\t$3",
+      "}, [${2:deps}]);"
+    ]
+  },
+  "useMemo": {
+    "prefix": "umm",
+    "body": [
+      "const ${1:memo} = useMemo(() => ${2:function}, [${3:deps}])"
+    ]
+  },
+  "tuseMemo": {
+    "prefix": "tumm",
+    "body": [
+      "const ${2:memo} = useMemo<${1:any}>(() => ${3:function}, [${4:deps}])"
+    ]
+  },
+  "useRef": {
+    "prefix": "ur",
+    "body": [
+      "const ${1:ref} = useRef(${2:initialValue})"
+    ]
+  },
+  "Typescript useRef": {
+    "prefix": "tur",
+    "body": [
+      "const ${2:ref} = useRef<${1:any}>(${3:initialValue})"
+    ]
+  },
+  "useLayoutEffect": {
+    "prefix": "ule",
+    "body": [
+      "useLayoutEffect(() => {",
+      "\t${2:effect}",
+      "\treturn () => {",
+      "\t\t${2:cleanup}",
+      "\t};",
+      "}, [${1:input}])"
+    ]
+  },
+  "useDebugValue": {
+    "prefix": "useDebugValue",
+    "body": [
+      "useDebugValue(${1:value})"
+    ]
+  },
+  "reactNativeFunctionalExportComponent": {
+    "prefix": "rrnfe",
+    "body": [
+      "import { View, Text } from 'react-native'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text>$0</Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      ""
+    ]
+  },
+  "reactNativeFunctionalExportComponentWithStyles": {
+    "prefix": "rnfes",
+    "body": [
+      "import { StyleSheet, Text, View } from 'react-native'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<View>",
+      "\t\t\t<Text>$0</Text>",
+      "\t\t</View>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      "",
+      "const styles = StyleSheet.create({})",
+      ""
+    ]
+  },
+  "reactNativeImport": {
+    "prefix": "imrn",
+    "body": "import { ${1:moduleName} } from 'react-native'"
+  },
+  "reactNativeScreen": {
+    "prefix": "rnfs",
+    "body": [
+      "import { Screen } from '@components/screen'",
+      "import { Text } from '@components/text'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<Screen>",
+      "\t\t\t<Text />",
+      "\t\t</Screen>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      ""
+    ]
+  },
+  "reactNativeScreenWithStyles": {
+    "prefix": "rnfss",
+    "body": [
+      "import { Screen } from '@components/screen'",
+      "import { Text } from '@components/text'",
+      "import { ScaledSheet } from '@lib/react-native-size-matters'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<Screen>",
+      "\t\t\t<Text />",
+      "\t\t</Screen>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      "",
+      "const styles = ScaledSheet.create({",
+      "\t",
+      "})",
+      ""
+    ]
+  },
+  "reactNativeFunctionalComponentWithStyles": {
+    "prefix": "rnfes",
+    "body": [
+      "import { Box } from 'native-base'",
+      "import { Text } from '@components/text'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<Box>",
+      "\t\t\t<Text />",
+      "\t\t</Box>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      ""
+    ]
+  },
+  "reactNativeFunctionalComponent": {
+    "prefix": "rnfe",
+    "body": [
+      "import { Box } from 'native-base'",
+      "import { Text } from '@components/text'",
+      "import { ScaledSheet } from '@lib/react-native-size-matters'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<Box>",
+      "\t\t\t<Text />",
+      "\t\t</Box>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}",
+      "",
+      "const styles = ScaledSheet.create({",
+      "\t",
+      "})",
+      ""
+    ]
+  },
+  "scaleStyles": {
+    "prefix": "css",
+    "body": [
+      "const styles = ScaledSheet.create({",
+      "\t",
+      "})",
+      ""
+    ]
+  },
+  "translation": {
+    "prefix": "utr",
+    "body": [
+      "const { t } = useTranslation()",
+    ]
+  },
+}

@@ -1,0 +1,5 @@
+export const baseFontName = 'Poppins'
+export const baseRegularFontName = 'Poppins-Regular'
+export const baseMediumFontName = 'Poppins-Medium'
+export const baseSemiBoldFontName = 'Poppins-SemiBold'
+export const baseBoldFontName = 'Poppins-Bold'
