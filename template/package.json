@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator='iPhone 11 Pro'",
+    "ios": "react-native run-ios --simulator='iPhone 12 Pro'",
     "start": "react-native start",
     "start:clean": "watchman watch-del . && watchman watch-project . && react-native start --reset-cache",
     "test": "jest",
