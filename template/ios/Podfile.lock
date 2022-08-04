@@ -299,7 +299,7 @@ PODS:
     - react-native-config/App (= 1.4.6)
   - react-native-config/App (1.4.6):
     - React-Core
-  - react-native-flipper (0.156.0):
+  - react-native-flipper (0.157.0):
     - React-Core
   - react-native-netinfo (9.3.0):
     - React-Core
@@ -644,7 +644,7 @@ SPEC CHECKSUMS:
   React-jsinspector: bb2605f98aada5d81f3494690da3ef3b4ff3b716
   React-logger: 23a50ef4c18bf9adbb51e2c979318e6b3a2e44a1
   react-native-config: 7cd105e71d903104e8919261480858940a6b9c0e
-  react-native-flipper: 3a5a6f1c414c66c0bdfc67ac7fef36cd8c44d1f5
+  react-native-flipper: cc9cdf47db2bbe0d9227eeec4f93e2290e55674b
   react-native-netinfo: 129bd99f607a2dc5bb096168f3e5c150fd1f1c95
   react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   React-perflogger: 39d2ba8cbcac54d1bb1d9a980dab348e96aef467
