@@ -1,10 +1,10 @@
-import {QueryClient} from 'react-query'
+import {QueryClient} from '@tanstack/react-query'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      suspense: true,
-      retry: 2, // No retry mode for the demo
+      suspense: false,
+      retry: false,
     },
   },
 })

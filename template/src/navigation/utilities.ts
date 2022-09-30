@@ -1,10 +1,11 @@
+import Routes from '@navigation/routes'
 import {CommonActions, StackActions, createNavigationContainerRef} from '@react-navigation/native'
 import {RootStackParamList} from '@typings/navigation'
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>()
 
 export const navigate = (name: keyof RootStackParamList, params?: any, key?: string) => {
-  if (navigationRef.isReady()) {
+  if (navigationRef.current?.isReady()) {
     if (key) {
       navigationRef.current?.navigate({key, name, params})
       return
@@ -17,7 +18,7 @@ export const goBack = () => {
   if (navigationRef.current?.canGoBack()) {
     navigationRef.current?.goBack()
   } else {
-    navigateAndReset([{name: 'MainStack'}], 0)
+    navigateAndReset([{name: Routes.AuthorizedStack}], 0)
   }
 }
 
@@ -39,6 +40,10 @@ export function navigateAndSimpleReset(name: string, index = 0) {
       }),
     )
   }
+}
+
+export function getCurrentRouteName() {
+  return navigationRef.getCurrentRoute()?.name
 }
 
 export const push = (name: string, params?: any) => {
@@ -64,6 +69,9 @@ const defaultExport = {
   pop,
   popToTop,
   navigationRef,
+  navigateAndSimpleReset,
+  navigateAndReset,
+  getCurrentRouteName,
 }
 
 export default defaultExport

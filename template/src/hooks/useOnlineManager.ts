@@ -1,10 +1,10 @@
-import * as React from 'react'
 import NetInfo from '@react-native-community/netinfo'
-import {onlineManager} from 'react-query'
+import {onlineManager} from '@tanstack/react-query'
 import {Platform} from 'react-native'
+import {useEffect} from 'react'
 
 export function useOnlineManager() {
-  React.useEffect(() => {
+  useEffect(() => {
     // React Query already supports on reconnect auto refetch in web browser
     if (Platform.OS !== 'web') {
       return NetInfo.addEventListener(state => {
@@ -13,5 +13,6 @@ export function useOnlineManager() {
         )
       })
     }
+    return
   }, [])
 }

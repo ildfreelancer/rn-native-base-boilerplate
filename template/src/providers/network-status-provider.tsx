@@ -10,7 +10,7 @@ type NetworkStatus = {
 export const NetworkStatusContext = createContext<NetworkStatus | null>(null)
 
 export type NetworkStatusProviderProps = {
-  children: ReactNode
+  children?: ReactNode
 }
 export const NetworkStatusProvider = ({children}: NetworkStatusProviderProps) => {
   const networkStatus = useNetworkStatus()

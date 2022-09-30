@@ -2,43 +2,49 @@ fastlane_require 'dotenv'
 
 default_platform(:android)
 
+before_all do |lane|
+  environment = lane_context[SharedValues::ENVIRONMENT]
+  unless environment.nil?
+      puts "Loading variables from env.#{environment}"
+      # Make sure react-native-config gets proper .env file loaded
+      ENV["ENVFILE"] = ".env.#{environment}"
+  end
+end
+
 # Get app version
 def get_app_version
-  version = sh("node -p \"require(\'..\/package.json\').version\"")
+  version = sh("node -p \"require(\'..\/..\/package.json\').version\"")
   version.delete!("\n")
   ENV['APP_VERSION'] = version
 end
 
+def set_version_code_to_current_timestamp
+  incremented_version_code = Time.now.to_i.to_s
+  ENV['ANDROID_VERSION_CODE'] = incremented_version_code
+end
+
 platform :android do
-  # Increment version code
-  def set_version_code_to_current_timestamp
-    incremented_version_code = Time.now.to_i.to_s
-    ENV['ANDROID_VERSION_CODE'] = incremented_version_code
-  end
-
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
-  end
-
   desc "Build app"
   private_lane :build do |options|
+    desc "Increment version code"
     set_version_code_to_current_timestamp()
-
-    # get_app_version()
-
-    # android_set_version_name(
-    #   version_name: ENV['APP_VERSION'],
-    # )
-
     android_set_version_code(
       version_code: ENV['ANDROID_VERSION_CODE'].to_i,
     )
 
+    desc "Set app version"
+    get_app_version()
+    android_set_version_name(
+      version_name: ENV['APP_VERSION'],
+    )
+
+    desc "Build app"
+    gradle(task: "clean")
+
     gradle(
-      task: "clean bundle",
-      build_type: 'Release',
+      task: options[:task],
+      flavor: options[:flavor],
+      build_type: options[:build_type],
       properties: {
         "android.injected.signing.store.file" => ENV['MYAPP_UPLOAD_STORE_FILE'],
         "android.injected.signing.store.password" => ENV['MYAPP_UPLOAD_STORE_PASSWORD'],
@@ -50,9 +56,27 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :distribute_to_playstore do |options|
-    build
-    upload_to_play_store(track: 'internal')
+    build(task: "bundle", flavor: "production", build_type: "Release")
+    upload_to_play_store(
+      track: 'internal',
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
     slack(message: "[Android] Application was built and successfully uploaded to Play store :rocket:")
+  end
+
+  desc "Deploy a new version to the Firebase Distribution"
+  lane :distribute_to_firebase do |options|
+    build(task: "assemble", flavor: "staging", build_type: "Release")
+
+    firebase_app_distribution(
+      app: ENV['FIREBASE_APP_ID'],
+      android_artifact_type: "APK",
+      service_credentials_file: ENV['GOOGLE_APPLICATION_CREDENTIALS']
+    )
+    slack(message: "[Android] Application was built and successfully uploaded to Firebase Distribution :rocket:")
   end
 end
 

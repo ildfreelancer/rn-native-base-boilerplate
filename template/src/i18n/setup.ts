@@ -3,8 +3,10 @@ import i18n from 'i18next'
 import RNLocalize from 'react-native-localize'
 import {I18nManager} from 'react-native'
 import {initReactI18next} from 'react-i18next'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import en from './translations/en.json'
+import {Storage} from '@utils/mmkv'
+import {LOG} from '@utils/logger'
+import {LOCALE} from '@constants/app'
 
 const DEFAULT_RTL = false
 const DEFAULT_LOCALE = 'en'
@@ -22,30 +24,34 @@ const LANGUAGE_DETECTOR = {
   type: 'languageDetector',
   async: true,
   detect: callback => {
-    AsyncStorage.getItem('locale', (err, language) => {
-      // if error fetching stored data or no language was stored
-      // display errors when in DEV mode as console statements
-      if (err || !language) {
-        if (err) {
-          console.log('Error fetching Languages from AsyncStorage ', err)
-        } else {
-          console.log('No language is set, choosing English as fallback')
+    function setDefaultLanguage() {
+      const {languageTag, isRTL} =
+        RNLocalize.findBestAvailableLanguage(LANG_CODES) || defaultLanguage
+      // update layout direction
+      I18nManager.forceRTL(isRTL)
+      callback(languageTag)
+    }
+
+    Storage.instance
+      .getItem(LOCALE, 'string')
+      .then((language: string) => {
+        if (!language) {
+          throw new Error('No language is set, choosing English as fallback')
         }
-        const {languageTag, isRTL} =
-          RNLocalize.findBestAvailableLanguage(LANG_CODES) || defaultLanguage
-        // update layout direction
-        I18nManager.forceRTL(isRTL)
-        callback(languageTag)
-        return
-      }
-      callback(language)
-    })
+        callback(language)
+      })
+      .catch((error: any) => {
+        // if error fetching stored data or no language was stored
+        // display errors when in DEV mode as console statements
+        LOG.error(error.message)
+        setDefaultLanguage()
+      })
   },
   init: () => {
     //
   },
   cacheUserLanguage: language => {
-    AsyncStorage.setItem('locale', language)
+    Storage.instance.setItem(LOCALE, language)
   },
 }
 

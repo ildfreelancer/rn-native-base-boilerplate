@@ -1,32 +1,30 @@
 import {Suspense, ReactNode} from 'react'
 import {GestureHandlerRootView} from 'react-native-gesture-handler'
 import {NativeBaseProvider, StorageManager, ColorMode, Spinner, Center} from 'native-base'
-import {nativeBaseTheme} from './styles/theme'
-import {QueryClientProvider} from 'react-query'
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet'
+import {QueryClientProvider} from '@tanstack/react-query'
 import {SafeAreaProvider} from 'react-native-safe-area-context'
-import {ProvideScreenDimensions} from './hooks/useScreenDimensions'
 import {queryClient} from '@services/api/reactQuery/query-client'
-import {NetworkStatusProvider} from './providers/network-status-provider'
 import {combineProviders} from '@utils/combine-providers'
 import {NavigationProvider} from '@providers/navigation-provider'
-import {loadString, saveString} from '@utils/storage'
+import {Storage} from '@utils/mmkv'
+import {COLOR_MODE} from '@constants/app'
+import {ProvideScreenDimensions} from '@hooks/useScreenDimensions'
+import {NetworkStatusProvider} from '@providers/network-status-provider'
+import {nativeBaseTheme} from '@styles/theme'
 
 // Define the colorModeManager,
 const colorModeManagerNative: StorageManager = {
   get: async () => {
     try {
-      const val = await loadString('@color-mode')
+      const val = Storage.instance.getItem(COLOR_MODE)
       return val === 'dark' ? 'dark' : 'light'
     } catch (e) {
       return 'light'
     }
   },
   set: async (value: ColorMode) => {
-    try {
-      await saveString('@color-mode', value || 'light')
-    } catch (e) {
-      console.log(e)
-    }
+    Storage.instance.setItem(COLOR_MODE, value || 'light')
   },
 }
 
@@ -39,14 +37,6 @@ const GestureHandlerProvider = (props: {children?: ReactNode}) => (
 const RTQueryClientProvider = (props: {children?: ReactNode}) => (
   <QueryClientProvider client={queryClient} {...props} />
 )
-
-// const ReduxProvider = (props: {children?: ReactNode}) => (
-//   <Provider store={store}>
-//     <PersistGate loading={null} persistor={persistor}>
-//       {props.children}
-//     </PersistGate>
-//   </Provider>
-// );
 
 const SuspenseProvider = (props: {children?: ReactNode}) => (
   <Suspense
@@ -80,6 +70,7 @@ export const AppProvider = ({children}: {children?: ReactNode}) =>
       RTQueryClientProvider,
       NetworkStatusProvider,
       NavigationProvider,
+      BottomSheetModalProvider,
     ],
     children,
   )

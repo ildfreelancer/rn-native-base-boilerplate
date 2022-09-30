@@ -10,20 +10,22 @@ import {
   KeyboardAwareScrollViewProps,
 } from 'react-native-keyboard-aware-scroll-view'
 import {Header} from '../header'
-import {Flex, IFlexProps} from 'native-base'
+import {Flex, IBoxProps, IFlexProps} from 'native-base'
 import {createContext, ReactNode, useContext} from 'react'
+import {StatusBar} from 'react-native'
 
 const ScreenContext = createContext({
   variant: 'fixed',
 })
-type ScreenProps = {
+type ScreenProps = IBoxProps & {
   variant?: 'fixed' | 'scroll'
-  children?: ReactNode
+  barStyle?: 'light-content' | 'dark-content'
 }
-export const Screen = ({variant = 'fixed', children}: ScreenProps) => {
+export const Screen = ({variant = 'fixed', barStyle = 'dark-content', ...rest}: ScreenProps) => {
   return (
     <ScreenContext.Provider value={{variant}}>
-      <Flex height="100%">{children}</Flex>
+      <StatusBar barStyle={barStyle} />
+      <Flex height="100%" {...rest} />
     </ScreenContext.Provider>
   )
 }
@@ -53,9 +55,9 @@ type ScreenBodyProps = IFlexProps & {
   style?: StyleProp<ViewStyle>
   children?: ReactNode
 }
-const ScreenBody = ({children, ...props}: ScreenBodyProps) => {
+const ScreenBody = ({children, safeAreaBottom = true, ...props}: ScreenBodyProps) => {
   return (
-    <Flex flex={1} safeAreaBottom {...props}>
+    <Flex flex={1} {...props} pb={safeAreaBottom ? 'vs-6.5' : 0}>
       {children}
     </Flex>
   )

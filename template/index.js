@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 import {AppRegistry, LogBox, Text} from 'react-native'
 
 Text.defaultProps = Text.defaultProps || {}
-Text.defaultProps.maxFontSizeMultiplier = 1.2
+Text.defaultProps.maxFontSizeMultiplier = 1
 import Config from 'react-native-config'
 
 // Setup responsive scale across the devices

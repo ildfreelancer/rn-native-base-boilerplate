@@ -9,11 +9,21 @@ import {extendTheme, ColorModeOptions} from 'native-base'
 import {s, vs} from '@libs/react-native-size-matters'
 
 import Config from './native-base.config'
+import {DefaultTheme} from '@react-navigation/native'
 const config: ColorModeOptions = {
   useSystemColorMode: false,
   initialColorMode: 'light',
   accessibleColors: false,
   ...Config,
+}
+
+// navigation theme
+export const navigationDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#F3F4F9',
+  },
 }
 
 // customize theme

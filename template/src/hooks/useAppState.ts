@@ -5,7 +5,6 @@ export function useAppState(onChange: (appState: AppStateStatus) => void) {
   useEffect(() => {
     const appStateHandler = AppState.addEventListener('change', onChange)
     return () => {
-      // AppState.removeEventListener("change", onChange);
       appStateHandler.remove()
     }
   }, [onChange])

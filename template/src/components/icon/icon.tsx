@@ -4,22 +4,45 @@ import icons from './icons'
 import pick from 'lodash-es/pick'
 import omit from 'lodash-es/omit'
 
-export const Icon = memo(({name, height, width, size, ...rest}: IIconProps) => {
-  const [colorPick] = useToken(
-    // the key within the theme, in this case `theme.colors`
-    'colors', // the subkey(s), resolving to `theme.colors.warning.1`
-    [rest.color as any], // a single fallback or fallback array matching the length of the previous arg
-  )
-  const [sizePick] = useToken('sizes', [size as any])
+export type IconName = keyof typeof icons
+
+export type IconProps = IIconProps & {
+  stroke?: string
+  fill?: string
+}
+export const Icon = memo((props: IconProps) => {
+  const {name, height, width, size, ...rest} = props
+  const [colorPick, fillColor, strokeColor] = useToken('colors', [
+    rest.color as any,
+    rest.fill as any,
+    rest.stroke as any,
+  ])
+  const sizePick = useToken('sizes', size as any)
 
   if (name && icons[name]) {
-    const {color, ...otherProps} = rest
+    const {color, fill, stroke, ...otherProps} = rest
     const cloned: any = {...otherProps}
     if (color) {
       if (colorPick) {
         cloned.color = colorPick
-      } else {
+      } else if ((color as any).includes('#') || !(color as any).includes('.')) {
         cloned.color = color
+      }
+    }
+
+    if (fill) {
+      if (fillColor) {
+        cloned.fill = fillColor
+      } else if (fill.includes('#') || !fill.includes('.')) {
+        cloned.fill = fill
+      }
+    }
+
+    if (stroke) {
+      if (strokeColor) {
+        cloned.stroke = strokeColor
+      } else if (stroke.includes('#') || !stroke.includes('.')) {
+        cloned.stroke = stroke
       }
     }
 
@@ -36,10 +59,10 @@ export const Icon = memo(({name, height, width, size, ...rest}: IIconProps) => {
     }
 
     return (
-      <Box {...omit(cloned, ['height', 'width', 'color'])}>
-        <IconSVG {...pick(cloned, ['height', 'width', 'color'])} />
+      <Box {...omit(cloned, ['height', 'width', 'color', 'fill', 'stroke'])}>
+        <IconSVG {...pick(cloned, ['height', 'width', 'color', 'fill', 'stroke'])} />
       </Box>
     )
   }
-  return <NBIcon {...rest} />
+  return <NBIcon {...omit(props, ['fill', 'stroke'])} />
 })
